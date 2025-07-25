@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Buquê Virtual da Laís 💙</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Impact, sans-serif;
+    background: linear-gradient(to bottom right, #d0f0ff, #eaf6ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+    transition: background 1s ease;
+  }
+
+  .envelope-img {
+    width: 250px;
+    cursor: pointer;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+  }
+
+  .envelope-img.opening {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 0;
+  }
+
+  .content {
+    display: none;
+    text-align: center;
+    animation: fadeIn 1s forwards;
+  }
+
+  .show {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    font-size: 32px;
+    color: #00f7ff;
+    animation: pisca 1s infinite;
+  }
+
+  h2 {
+    font-size: 24px;
+    color: #ff0;
+    animation: pisca 1s infinite;
+  }
+
+  @keyframes pisca {
+    0%,100%{opacity:1}50%{opacity:0}
+  }
+
+  .emoji {
+    font-size: 100px;
+    animation: treme 0.3s infinite;
+  }
+
+  @keyframes treme {
+    0%{transform:translateX(-2px)}50%{transform:translateX(2px)}100%{transform:translateX(-2px)}
+  }
+
+  .bouquet, .msg {
+    display: none;
+    animation: fadeIn 1s forwards;
+  }
+
+  .bouquet.show, .msg.show {
+    display: block;
+  }
+
+  .bouquet {
+    width: 300px;
+    margin-top: 20px;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    background: #00ff99;
+    cursor: pointer;
+    animation: pulsa 1s infinite;
+  }
+  .msg {
+  color: white;
+}
+
+  @keyframes pulsa {
+    0%,100%{transform:scale(1)}50%{transform:scale(1.1)}
+  }
+
+  #envelopeText {
+    margin-top:10px;
+    color:#333;
+    font-size:18px;
+  }
+</style>
+</head>
+<body>
+  <div style="text-align:center;">
+    <img src="envelope.png" class="envelope-img" id="envelope" onclick="abrirCarta()">
+    <p id="envelopeText">Clique no envelope 📩</p>
+  </div>
+
+  <div id="conteudo" class="content">
+    <h1>🎉 HOJE É O NIVER DA LAÍS 🎉</h1>
+    <h2>🔥✨ A Muié tá na casa ✨🔥</h2>
+    <div class="emoji">👍😎🔥</div>
+    <div style="display: flex; justify-content: center;">
+    <img class="bouquet" id="bouquet" src="buque.png" alt="Buquê Azul">
+    </div>
+    <button onclick="mostrarMensagem()">Clique aqui pra receber seu presente 🎁</button>
+    <div class="msg" id="mensagem">
+      💐 Um buquê azulzão porque é o que tem pra hoje 😅<br><br>
+      💸 O físico fica pra quando o salário cair!<br><br>
+      🥳 Parabéns Laizona, Deus te abeçoe, muitos anos de vida.
+      aproveita muito teu dia, e não esquece:<br>
+      é virtual mas é de coração 😂👏<br><br>
+      Conte Cmg sempre!<br>
+    </div>
+    <audio id="melodyAudio" src="melody.mp3"></audio>
+    <audio id="sikeraAudio" src="https://www.myinstants.com/media/sounds/vinheta-sikera.mp3"></audio>
+    <audio id="popSound" src="pop.mp3"></audio>
+    <audio id="brilhoSound" src="brilho.mp3"></audio>
+  </div>
+
+<script>
+  function abrirCarta() {
+    const carta = document.getElementById('envelope');
+    const pop = document.getElementById('popSound');
+    const brilho = document.getElementById('brilhoSound');
+    const envelopeText = document.getElementById('envelopeText');
+
+    envelopeText.style.display = 'none';
+    pop.play();
+    carta.classList.add('opening');
+
+    setTimeout(() => {
+      carta.style.display = 'none';
+      document.body.style.background = '#000';
+      document.getElementById('conteudo').classList.add('show');
+      brilho.play();
+    }, 700);
+  }
+
+  function mostrarMensagem() {
+    document.getElementById('bouquet').classList.add('show');
+    document.getElementById('mensagem').classList.add('show');
+
+    const sikera = document.getElementById('sikeraAudio');
+    const melody = document.getElementById('melodyAudio');
+
+    sikera.play().then(() => {
+      setTimeout(() => melody.play(), 1800);
+    }).catch(() => melody.play());
+  }
+</script>
+</body>
+</html>
